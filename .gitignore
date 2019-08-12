@@ -1,0 +1,12 @@
+#terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+terraform/crash.log
+terraform.tfvars
+
+#certs
+**.crt
+**.csr
+**.key
+**.pfx
