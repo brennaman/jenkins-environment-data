@@ -26,6 +26,12 @@ resource "azurerm_storage_share" "jenkinsshare" {
   quota                = 20
 }
 
+resource "azurerm_storage_share" "vaultshare" {
+  name                 = "vault"
+  storage_account_name = "${azurerm_storage_account.storage-account.name}"
+  quota                = 20
+}
+
 data "azurerm_storage_account" "data-storage-account" {
   name                = "${azurerm_storage_account.storage-account.name}"
   resource_group_name = "${azurerm_resource_group.grp.name}"
