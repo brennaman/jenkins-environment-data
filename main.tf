@@ -32,6 +32,30 @@ resource "azurerm_storage_share" "vaultshare" {
   quota                = 20
 }
 
+resource "azurerm_storage_share_directory" "vaultdirconfig" {
+  name                 = "config"
+  share_name           = "${azurerm_storage_share.vaultshare.name}"
+  storage_account_name = "${azurerm_storage_account.storage-account.name}"
+
+  provisioner "file" {
+    source      = "vault.json"
+    destination = "/config/vault.json"
+  }
+
+}
+
+resource "azurerm_storage_share_directory" "vaultdirfile" {
+  name                 = "file"
+  share_name           = "${azurerm_storage_share.vaultshare.name}"
+  storage_account_name = "${azurerm_storage_account.storage-account.name}"
+}
+
+resource "azurerm_storage_share_directory" "vaultdirlogs" {
+  name                 = "logs"
+  share_name           = "${azurerm_storage_share.vaultshare.name}"
+  storage_account_name = "${azurerm_storage_account.storage-account.name}"
+}
+
 data "azurerm_storage_account" "data-storage-account" {
   name                = "${azurerm_storage_account.storage-account.name}"
   resource_group_name = "${azurerm_resource_group.grp.name}"
